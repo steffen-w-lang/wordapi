@@ -1,0 +1,19 @@
+{
+  "name": "wordapi",
+  "version": "1.0.0",
+  "description": "API for word add-in",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steffen Lang",
+  "license": "ISC",
+  "dependencies": {
+    "azure-storage": "^2.10.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "swagger-ui-express": "^4.1.3"
+  }
+}
