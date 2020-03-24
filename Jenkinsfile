@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         CONATINER_NAME='wordapi'
+        AZURECR_CREDENTIALS_ID = "ufstdev.azurecr.io"
     }    
 
     environment { 
@@ -18,7 +19,7 @@ pipeline {
         }
         stage('Docker login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${env.ARTIFACTORY_CREDENTIALS_ID}", passwordVariable: 'PW', usernameVariable: 'USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: "${env.AZURECR_CREDENTIALS_ID}", passwordVariable: 'PW', usernameVariable: 'USERNAME')]) {
                     sh ...
                         docker -D login -u ${USERNAME} -p ${PW} ufstdev.azurecr.io
                     ...
@@ -28,7 +29,7 @@ pipeline {
         stage('Build container') {
             steps {
                 sh ...
-                    docker build -t skatligning-docker-local.artifactory.ccta.dk/${CONATINER_NAME}:latest .
+                    docker build -t ufstdev.azurecr.io/${CONATINER_NAME}:latest .
                 ...                        
             }
         }
