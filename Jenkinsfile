@@ -7,13 +7,13 @@ pipeline {
     }    
 
     stages {
-        stage('Build') {
-            steps {
-                sh '''
-                    npm install
-                '''
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh '''
+        //             npm install
+        //         '''
+        //     }
+        // }
         stage('Docker login') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.AZURECR_CREDENTIALS_ID}", passwordVariable: 'PW', usernameVariable: 'USERNAME')]) {
