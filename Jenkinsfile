@@ -6,9 +6,6 @@ pipeline {
         AZURECR_CREDENTIALS_ID = "ufstdev.azurecr.io"
     }    
 
-    environment { 
-        CI = 'true'
-    }
     stages {
         stage('Build') {
             steps {
