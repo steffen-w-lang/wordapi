@@ -44,6 +44,7 @@ pipeline {
                     sh '''
                         az container create --resource-group UFST-dev-RG --name wordapi --image ufstdev.azurecr.io/wordapi:latest --dns-name-label wordapi --ports 80
                     '''
+                }
             }
         }
     }
