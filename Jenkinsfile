@@ -40,9 +40,11 @@ pipeline {
         }
         stage('Deploy container') {
             steps {
-                withCredentials([azureServicePrincipal("${env.AZURE_SERVICEPRINCIPAL_ID}")]) {
+                withCredentials([azureServicePrincipal($env.AZURE_SERVICEPRINCIPAL_ID)]) {
                     sh '''
+                        az login --service-prinipal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
                         az container create --resource-group UFST-dev-RG --name wordapi --image ufstdev.azurecr.io/wordapi:latest --dns-name-label wordapi --ports 80
+                        az logout 
                     '''
                 }
             }
