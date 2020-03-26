@@ -4,6 +4,7 @@ pipeline {
     environment {
         CONATINER_NAME='wordapi'
         AZURECR_CREDENTIALS_ID = "ufstdev.azurecr.io"
+        AZURE_SERVICEPRINCIPAL_ID = "azure-service-principal"
     }    
 
     stages {
@@ -35,6 +36,14 @@ pipeline {
                 sh '''
                     docker push ufstdev.azurecr.io/${CONATINER_NAME}:latest
                 '''
+            }
+        }
+        stage('Deploy container') {
+            steps {
+                withCredentials([azureServicePrincipal("${env.AZURE_SERVICEPRINCIPAL_ID}")]) {
+                    sh '''
+                        az container create --resource-group UFST-Dev-RG --name wordapi --image ufstdev.azurecr.io/wordapi:latest --dns-name-label wordapi --ports 80
+                    '''
             }
         }
     }
