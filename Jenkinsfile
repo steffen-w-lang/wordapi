@@ -42,7 +42,7 @@ pipeline {
             steps {
                 withCredentials([azureServicePrincipal("${env.AZURE_SERVICEPRINCIPAL_ID}")]) {
                     sh '''
-                        az container create --resource-group UFST-Dev-RG --name wordapi --image ufstdev.azurecr.io/wordapi:latest --dns-name-label wordapi --ports 80
+                        az container create --resource-group UFST-dev-RG --name wordapi --image ufstdev.azurecr.io/wordapi:latest --dns-name-label wordapi --ports 80
                     '''
             }
         }
